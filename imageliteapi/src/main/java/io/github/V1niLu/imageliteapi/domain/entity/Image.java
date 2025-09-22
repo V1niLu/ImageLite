@@ -45,5 +45,12 @@ public class Image {
     @Lob //indica que o campo é um Large Object, usado para armazenar grandes quantidades de dados binários ou texto
     private byte[] file; // Arquivo da imagem em bytes
 
+    public String getFileName(){
+        return getName()
+                .concat(".")
+                .concat(getExtension().name());
+        // Retorna o nome do arquivo com a extensão, por exemplo, "imagem.png"
+
+    }
 
 }
