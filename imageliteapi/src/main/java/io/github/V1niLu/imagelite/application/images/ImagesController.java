@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/images")
@@ -56,14 +58,36 @@ public class ImagesController {
         HttpHeaders header = new HttpHeaders(); // Cria um novo objeto HttpHeaders para definir os cabeçalhos da resposta
         header.setContentType(image.getExtension().getMediaType()); // Define o tipo de conteúdo com base na extensão da imagem
         header.setContentLength(image.getSize()); // Define o tamanho do conteúdo
-        header.setContentDispositionFormData(
-                "inline; filename=\"" + image.getFileName() + "\"", image.getFileName());
+        header.setContentDispositionFormData("inline", image.getFileName());
         // Define o cabeçalho Content-Disposition para sugerir o nome do arquivo ao baixar
 
         // retorna nome do arquivo, header criados, status OK
         return new ResponseEntity<>(image.getFile(), header, HttpStatus.OK);
+    }
 
+    @GetMapping
+    public ResponseEntity <List<ImageDTO>>search(
+            @RequestParam(value = "extension", required = false, defaultValue = "") String extension,
+            @RequestParam(value = "query", required = false) String query){
 
+        ImageExtension ext = null;
+        if (StringUtils.hasText(extension)) {
+            try {
+                ext = ImageExtension.valueOf(extension.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                // aqui você pode ignorar ou lançar um 400 Bad Request
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        var result = service.Search(ext, query);
+        // Busca as imagens que correspondem aos critérios de pesquisa
+
+        var images = result.stream().map(image -> {
+            var url = buildImageURL(image);
+            return mapper.imageToDTO(image, url.toString());
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(images); // Retorna a lista de ImageDTOs com status 200 OK
 
     }
 

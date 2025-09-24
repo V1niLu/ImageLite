@@ -25,4 +25,15 @@ public class ImageMapper {
 
     }
 
+    // Método para converter uma entidade Image em um DTO (Data Transfer Object) ImageDTO
+    public ImageDTO imageToDTO(Image image, String url){
+        return ImageDTO.builder()
+                .url(url) // URL da imagem
+                .extension(image.getExtension().name()) // Converte enum para String
+                .name(image.getName()) // Nome da imagem
+                .size(image.getSize()) // Tamanho em bytes
+                .uploadDate(image.getUploadDate().toLocalDate()) // Converte LocalDateTime para LocalDate
+                .build(); // Retorna o DTO construído
+    }
+
 }
