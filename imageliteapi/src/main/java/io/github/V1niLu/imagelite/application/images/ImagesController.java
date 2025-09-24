@@ -95,7 +95,7 @@ public class ImagesController {
 
         String imagePath = "/" + image.getId(); // Constrói o caminho da imagem com base no ID
         return ServletUriComponentsBuilder
-                .fromCurrentRequest() // Obtém a URL da requisição atual
+                .fromCurrentRequestUri() // Obtém a URL da requisição atual
                 .path(imagePath) // Adiciona o caminho da imagem à URL
                 .build() // Constrói o URI
                 .toUri(); // Constrói a URI completa da imagem
