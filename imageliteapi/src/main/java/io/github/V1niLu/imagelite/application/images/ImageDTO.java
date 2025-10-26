@@ -2,6 +2,7 @@ package io.github.V1niLu.imagelite.application.images;
 
 // DTO (Data Transfer Object) para transferir dados de imagem
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class ImageDTO {
     private String name;
     private String extension;
     private Long size;
+    @JsonFormat(pattern = "dd-MM-yyyy") // Formata a data no padrão dia-mês-ano
     private LocalDate uploadDate;
 
 }

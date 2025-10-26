@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/v1/images")
 @Slf4j // Anotação do Lombok para adicionar um logger à classe
 @RequiredArgsConstructor // Gera um construtor com argumentos para todos os campos finais não inicializados
+@CrossOrigin("*") // Permite requisições CORS da origem especificada (porta 3000)
 public class ImagesController {
 
     public final ImageService service;
