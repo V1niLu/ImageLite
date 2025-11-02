@@ -1,6 +1,7 @@
 interface TemplateProps {
 
-    children?: React.ReactNode
+    children?: React.ReactNode // Conteúdo dinâmico a ser renderizado dentro do template
+    loading ?: boolean // Indicador de carregamento
 
 }
 

@@ -4,7 +4,7 @@ import io.github.V1niLu.imageliteapi.domain.entity.Image;
 import io.github.V1niLu.imageliteapi.domain.enums.ImageExtension;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartFile; // Importação para manipulação de arquivos enviados via multipart/form-data
 
 import java.io.IOException;
 import java.util.List;
