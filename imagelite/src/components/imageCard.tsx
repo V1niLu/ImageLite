@@ -35,9 +35,9 @@ export const ImageCard: React.FC<ImageCardProps> = ({nome, tamanho, dataUpload, 
                 alt=""/>
                 <div className="card-body p-4 pb-10">
                     <h5 className="text-xl font-semibold mb-2 text-gray-600 text-center">{nome}</h5>
-                    <p className="text-gray-600 float-start">{formatBytes(tamanho, 2)}</p>
-                    <p className="text-gray-600 text-center mx-20">{extension}</p>
-                    <p className="text-gray-600 float-end -my-5">{dataUpload}</p>
+                    <p className="text-gray-600 text-center">{formatBytes(tamanho, 2)}</p>
+                    <p className="text-gray-600 text-center">{extension}</p>
+                    <p className="text-gray-600 text-center">{dataUpload}</p>
                 </div>
             </div>
         

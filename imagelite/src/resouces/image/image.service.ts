@@ -8,6 +8,13 @@ class ImageService {
         const response = await fetch(pesquisaUrl); //faz a requisição para o backend
         return await response.json(); //retorna o json convertido para o tipo Image[]
     }
+
+    async salvar(formData: FormData) : Promise<void>{ //salva uma nova imagem
+        await fetch(this.baseUrl, { //faz a requisição para o backend
+            method: "POST",
+            body: formData
+        });
+    }
 }
 
 // react hook

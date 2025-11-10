@@ -1,3 +1,5 @@
+import { ToastContainer } from 'react-toastify';
+
 interface TemplateProps {
 
     children?: React.ReactNode // Conteúdo dinâmico a ser renderizado dentro do template
@@ -15,8 +17,32 @@ export const Template: React.FC<TemplateProps> = ( props: TemplateProps ) => {
             </div>
 
             <Footer />
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={true}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </>
     )
+}
+
+interface RenderIfProps {
+    condition: boolean
+    children: React.ReactNode
+}
+
+export const RenderIf: React.FC<RenderIfProps> = ( {condition, children} : RenderIfProps) => {
+    if(condition){
+        return children
+    }
+    return false
 }
 
 const Header: React.FC = () => {
